@@ -29,7 +29,7 @@ exactly the functions that exist at that stage of the course:
 | Tag | Contents |
 |-----|----------|
 | `unit1` | Foundations (descriptive stats, plotting, inference helpers) |
-| `unit2` | + fits and indexes *(planned)* |
+| `unit2` | + fits and indexes |
 | `unit3` | + time series *(planned)* |
 | `unit4` | + image processing *(planned)* |
 | `unit5` | + high-dimensional data *(planned)* |
@@ -44,6 +44,7 @@ checkout always resolves the same `dasw`. See the textbook's
 +dasw/
   +plot/    plotting helpers
   +stats/   statistics and data generation
+  +tumor/   (see note below)
 tests/
   +dasw/    unit tests, mirroring the namespace under test
 .github/workflows/tests.yml   runs the tests in CI on every push
@@ -57,7 +58,7 @@ addpath(pwd);   % repo root, so dasw.* resolves
 runtests("tests", IncludeSubfolders=true)
 ```
 
-## Function catalog (unit1)
+## Function catalog (unit2)
 
 ### `dasw.plot`
 | Function | Summary |
@@ -65,6 +66,7 @@ runtests("tests", IncludeSubfolders=true)
 | `cumhist(data)` | `[X,Y]` for a cumulative histogram (percent ≤ X) |
 | `histbins(data, edges)` | `[N, centers]` histogram counts for custom bin edges |
 | `autohistogram(data)` | `[counts, centers]` with Freedman–Diaconis bin widths |
+| `supersubplot(fig, m, n, p)` | subplot axes arranged across multiple figures |
 | `displaydrugvsplacebo(mode, d1, d2)` | display helper for the `drugvsplacebo` demo |
 
 ### `dasw.stats`
@@ -74,6 +76,19 @@ runtests("tests", IncludeSubfolders=true)
 | `ks2_cdf(n1, n2, d)` | CDF of the two-sample Kolmogorov–Smirnov statistic |
 | `simulate_random_sampling(true_d, N, M)` | simulate `M` sampling experiments of size `N` |
 | `drugvsplacebo(mode)` | interactive "guess drug vs. placebo" teaching demo |
+
+### `dasw.tumor`
+> **Note:** these functions are specific to the tumor-study lab, so by the
+> reusable-layer principle ("`dasw` knows nothing about the study") they do not
+> really belong in the shared library — they are candidates to move into a
+> project namespace. Harvested here as-is for now; see the tracking issue.
+
+| Function | Summary |
+|----------|---------|
+| `tumorfit(tumordata, reps)` | fit `Y = a + b*exp(c*x^d)`; return change and rate |
+| `tumorplot(data, a, b, c, d)` | plot tumor data with its fit |
+| `analyze_tumors(folder, condition)` | fit every `tumor_data.txt` under a folder → table |
+| `analyze_tumors_plot(folder, condition, plotit)` | as above, plotting each fit |
 
 ## Notes
 
