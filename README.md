@@ -79,6 +79,10 @@ runtests("tests", IncludeSubfolders=true)
 | `ks2_cdf(n1, n2, d)` | CDF of the two-sample Kolmogorov–Smirnov statistic |
 | `simulate_random_sampling(true_d, N, M)` | simulate `M` sampling experiments of size `N` |
 | `drugvsplacebo(mode)` | interactive "guess drug vs. placebo" teaching demo |
+| `roc_analysis(s1, s2)` | receiver-operating-characteristic curve for two samples |
+| `power_ttest2(n, d, sigma, alpha, R)` | Monte-Carlo power of a 2-sample t-test |
+| `stderr(data)` | standard error of the mean, column-wise |
+| `plot_lme(lme, tbl, cond, y, subj)` | plot data, fixed-effect means, and per-subject random effects of a fitted `LinearMixedModel` |
 
 ### `dasw.math`
 | Function | Summary |
