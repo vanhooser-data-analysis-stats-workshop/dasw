@@ -30,8 +30,8 @@ exactly the functions that exist at that stage of the course:
 |-----|----------|
 | `unit1` | Foundations (descriptive stats, plotting, inference helpers) |
 | `unit2` | + fits and indexes |
-| `unit3` | + time series (`dasw.signal`, `correlogram`) *(tag not yet cut)* |
-| `unit4` | + image processing (`dasw.roi`, `rescale`) *(tag not yet cut)* |
+| `unit3` | + time series (`dasw.signal`, `correlogram`) |
+| `unit4` | + image processing (`dasw.roi`, `rescale`) |
 | `unit5` | + high-dimensional data |
 
 Pin a project to a tag (e.g. as a submodule or a setup-script clone) so a clean
@@ -44,14 +44,8 @@ checkout always resolves the same `dasw`. See the textbook's
 +dasw/
   +plot/    plotting helpers
   +stats/   statistics and data generation
-  +math/    linear-algebra helpers
-  +fit/     curve-fitting helpers
-  +neuro/   neuroscience indexes
-  +signal/  time-series and signal processing
-  +roi/     regions of interest in images
   +validators/  argument checks for arguments blocks
   +data/    small data-handling helpers (name/value options)
-  +tumor/   (see note below)
 tests/
   +dasw/+unittest/   unit tests (test classes), mirroring the namespace
 demos/
@@ -86,9 +80,6 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | `cumhist(data)` | `[X,Y]` for a cumulative histogram (percent ≤ X) |
 | `histbins(data, edges)` | `[N, centers]` histogram counts for custom bin edges |
 | `autohistogram(data)` | `[counts, centers]` with Freedman–Diaconis bin widths |
-| `scatterplot(X, ...)` | scatter plot; pairwise subplots for >2 columns |
-| `supersubplot(fig, m, n, p)` | subplot axes arranged across multiple figures |
-| `linear_transform_explorer(LT, ...)` | animate a 2-D linear transformation |
 | `displaydrugvsplacebo(mode, d1, d2)` | display helper for the `drugvsplacebo` demo |
 
 ### `dasw.stats`
@@ -100,48 +91,7 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | `drugvsplacebo(mode)` | interactive "guess drug vs. placebo" teaching demo |
 | `roc_analysis(s1, s2)` | receiver-operating-characteristic curve for two samples |
 | `power_ttest2(n, d, sigma, alpha, R)` | Monte-Carlo power of a 2-sample t-test |
-| `stderr(data)` | standard error of the mean, column-wise |
 | `cumulative_hist_diff(s1, s2)` | largest difference between two samples' empirical CDFs (the KS statistic) |
-| `correlogram(t1, d1, t2, d2, lags, tol, alpha)` | correlation of two time series at each lag, with significance threshold |
-| `kmeans_over_time(data, K)` | animate the first 15 iterations of `kmeans` |
-| `plot_lme(lme, tbl, cond, y, subj)` | plot data, fixed-effect means, and per-subject random effects of a fitted `LinearMixedModel` |
-
-### `dasw.math`
-| Function | Summary |
-|----------|---------|
-| `rot2d(theta)` | 2-D rotation matrix |
-| `refl2d(theta)` | 2-D reflection matrix |
-| `rot3d(theta, axis)` | 3-D rotation matrix about axis 1, 2, or 3 |
-| `rescale(vals, int1, int2)` | map values from interval `int1` to `int2`, clipping unless `'noclip'` |
-
-### `dasw.fit`
-| Function | Summary |
-|----------|---------|
-| `watchfithappen(x, y, fittype, N)` | animate a fit over its first `N` iterations; return fit, GOF, and SSE per iteration |
-
-### `dasw.neuro`
-| Function | Summary |
-|----------|---------|
-| `orientation_selectivity_index(angles, responses)` | `(R(pref) - R(pref+90))/R(pref)` |
-| `orientation_vector_index(angles, responses)` | 1 minus circular variance in orientation space (Ringach et al. 2002) |
-
-### `dasw.signal`
-| Function | Summary |
-|----------|---------|
-| `threshold_crossings(input, threshold)` | indices where the data cross threshold going up |
-| `fourier_coefficients(t, signal)` | discrete Fourier `an`, `bn`, `fn` by direct projection |
-| `fouriercoeffs(data, si)` | complex Fourier coefficients and frequencies via `fft` |
-| `display_fourier_frequencies(t)` | animate the sinusoid at each discrete Fourier frequency |
-| `slidingwindowfunc(X, Y, start, step, stop, win, func, zeropad)` | apply a function in a sliding window |
-| `filtertransfer(b, a, sr, N, filtfunc)` | measured gain and phase shift of a filter across frequency |
-
-### `dasw.roi`
-| Function | Summary |
-|----------|---------|
-| `spotdetector(BI, conn, name, firstindex, labels)` | find connected spots in a binary image → ROI struct array |
-| `plot_rois(rois, textsize, color)` | draw ROI outlines with their index numbers |
-| `roi_overlap(rois, BI)` | fraction of each ROI's pixels that are on in a binary image |
-| `label_rois(rois, label, ...)` | add labels to ROIs' `labels` fields, without duplicates |
 
 ### `dasw.data`
 | Function | Summary |
@@ -153,19 +103,6 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | Function | Summary |
 |----------|---------|
 | `mustBeEqualSize(A, B)` | error unless `size(A)` equals `size(B)`; for use in an `arguments` block, e.g. `y (:,1) double {dasw.validators.mustBeEqualSize(x, y)}` (MATLAB has no built-in validator that compares two inputs) |
-
-### `dasw.tumor`
-> **Note:** these functions are specific to the tumor-study lab, so by the
-> reusable-layer principle ("`dasw` knows nothing about the study") they do not
-> really belong in the shared library — they are candidates to move into a
-> project namespace. Harvested here as-is for now; see the tracking issue.
-
-| Function | Summary |
-|----------|---------|
-| `tumorfit(tumordata, reps)` | fit `Y = a + b*exp(c*x^d)`; return change and rate |
-| `tumorplot(data, a, b, c, d)` | plot tumor data with its fit |
-| `analyze_tumors(folder, condition)` | fit every `tumor_data.txt` under a folder → table |
-| `analyze_tumors_plot(folder, condition, plotit)` | as above, plotting each fit |
 
 ## Notes
 
