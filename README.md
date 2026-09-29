@@ -46,6 +46,7 @@ checkout always resolves the same `dasw`. See the textbook's
   +stats/   statistics and data generation
   +fit/     curve-fitting helpers
   +neuro/   neuroscience indexes
+  +signal/  time-series and signal processing
   +validators/  argument checks for arguments blocks
   +data/    small data-handling helpers (name/value options)
   +tumor/   (see note below)
@@ -95,7 +96,9 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | `drugvsplacebo(mode)` | interactive "guess drug vs. placebo" teaching demo |
 | `roc_analysis(s1, s2)` | receiver-operating-characteristic curve for two samples |
 | `power_ttest2(n, d, sigma, alpha, R)` | Monte-Carlo power of a 2-sample t-test |
+| `stderr(data)` | standard error of the mean, column-wise |
 | `cumulative_hist_diff(s1, s2)` | largest difference between two samples' empirical CDFs (the KS statistic) |
+| `correlogram(t1, d1, t2, d2, lags, tol, alpha)` | correlation of two time series at each lag, with significance threshold |
 | `plot_lme(lme, tbl, cond, y, subj)` | plot data, fixed-effect means, and per-subject random effects of a fitted `LinearMixedModel` |
 
 ### `dasw.fit`
@@ -108,6 +111,16 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 |----------|---------|
 | `orientation_selectivity_index(angles, responses)` | `(R(pref) - R(pref+90))/R(pref)` |
 | `orientation_vector_index(angles, responses)` | 1 minus circular variance in orientation space (Ringach et al. 2002) |
+
+### `dasw.signal`
+| Function | Summary |
+|----------|---------|
+| `threshold_crossings(input, threshold)` | indices where the data cross threshold going up |
+| `fourier_coefficients(t, signal)` | discrete Fourier `an`, `bn`, `fn` by direct projection |
+| `fouriercoeffs(data, si)` | complex Fourier coefficients and frequencies via `fft` |
+| `display_fourier_frequencies(t)` | animate the sinusoid at each discrete Fourier frequency |
+| `slidingwindowfunc(X, Y, start, step, stop, win, func, zeropad)` | apply a function in a sliding window |
+| `filtertransfer(b, a, sr, N, filtfunc)` | measured gain and phase shift of a filter across frequency |
 
 ### `dasw.data`
 | Function | Summary |
