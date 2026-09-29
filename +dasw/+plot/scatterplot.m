@@ -40,7 +40,7 @@ markeredgecolor = 'auto';
 markerfacecolor = 'none';
 markersize  = 1;
 
-assign(varargin{:});
+dasw.data.assign(varargin{:});
 
 if length(projection) == 2
   d1 = projection(1);
