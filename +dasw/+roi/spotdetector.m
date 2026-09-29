@@ -31,9 +31,11 @@ rois = rois([]); % make an empty structure
 for i=1:numel(BW),
     newroi.name = roiname;
     newroi.index = firstindex -1 + i; % first entry will be firstindex
-    if numel(BW{i}(:,2))==1, % if contour is a single point, flare it out
-        newroi.xi = BW{i}(:,2) + [ -0.5 -0.5 0.5 0.5]';
-        newroi.yi = BW{i}(:,1) + [ -0.5 -0.5 0.5 0.5]';
+    % if contour is a single point, flare it out (bwboundaries returns a
+    % one-pixel spot as a closed contour, i.e. the same point repeated)
+    if size(unique(BW{i},'rows'),1)==1,
+        newroi.xi = BW{i}(1,2) + [ -0.5 -0.5 0.5 0.5]';
+        newroi.yi = BW{i}(1,1) + [ -0.5 -0.5 0.5 0.5]';
     else,
         newroi.xi = BW{i}(:,2);
         newroi.yi = BW{i}(:,1);
