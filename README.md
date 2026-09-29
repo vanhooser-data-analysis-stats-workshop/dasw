@@ -30,8 +30,8 @@ exactly the functions that exist at that stage of the course:
 |-----|----------|
 | `unit1` | Foundations (descriptive stats, plotting, inference helpers) |
 | `unit2` | + fits and indexes |
-| `unit3` | + time series *(pending new functions)* |
-| `unit4` | + image processing *(pending new functions)* |
+| `unit3` | + time series (`dasw.signal`, `correlogram`) *(tag not yet cut)* |
+| `unit4` | + image processing (`dasw.roi`, `rescale`) *(tag not yet cut)* |
 | `unit5` | + high-dimensional data |
 
 Pin a project to a tag (e.g. as a submodule or a setup-script clone) so a clean
@@ -165,6 +165,10 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 - **CI licensing:** the test workflow uses `matlab-actions`. Public repositories
   get MathWorks-hosted licensing automatically; a private repository needs an
   `MLM_LICENSE_TOKEN` secret configured.
-- **Test coverage:** the deterministic helpers (`dasw.math.*`,
-  `dasw.plot.histbins`) have unit tests. Plotting and interactive/demo functions
-  are harvested without behavioral tests for now.
+- **Test coverage:** every function has a unit-test class except the
+  interactive `dasw.stats.drugvsplacebo` demo and
+  `dasw.data.struct2namevaluepair`. Plotting and animating functions are tested
+  with hidden figures and `pause` turned off.
+- **Toolboxes:** CI installs the Statistics and Machine Learning, Curve
+  Fitting, and Image Processing toolboxes; functions that call into them need
+  the same toolboxes locally.
