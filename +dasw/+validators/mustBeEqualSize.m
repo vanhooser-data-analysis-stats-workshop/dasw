@@ -26,8 +26,7 @@ function mustBeEqualSize(a, b)
 %     dasw.validators.mustBeEqualSize(zeros(3,1), ones(3,1))  % passes
 %     dasw.validators.mustBeEqualSize(zeros(3,1), ones(4,1))  % errors
 %
-%   See also mustBeFinite, mustBeVector,
-%            dasw.demo.validators.mustBeEqualSize.showsWhichPairsPass.
+%   See also mustBeFinite, mustBeVector.
 
     if ~isequal(size(a), size(b))
         error('dasw:validators:mustBeEqualSize', ...

@@ -68,12 +68,10 @@ Demos are the other half: a test runs unobserved and passes or fails, while a
 demo draws a figure so a person can *see* that a function does what its help
 says. They mirror the namespace the same way under a `+demo` layer, and each
 one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
-`tests/`, so CI never opens their figures. Run one with:
-
-```matlab
-addpath(fullfile(pwd, "demos"));   % so dasw.demo.* resolves
-dasw.demo.validators.mustBeEqualSize.showsWhichPairsPass()
-```
+`tests/`, so CI never opens their figures. Run one with
+`addpath(fullfile(pwd, "demos"))` and then call it by name, e.g.
+`dasw.demo.<pkg>.<function>.<demoName>()`. Argument validators
+(`dasw.validators`) need tests but not demos.
 
 ## Function catalog
 
