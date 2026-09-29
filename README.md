@@ -44,9 +44,11 @@ checkout always resolves the same `dasw`. See the textbook's
 +dasw/
   +plot/    plotting helpers
   +stats/   statistics and data generation
+  +math/    linear-algebra helpers
   +fit/     curve-fitting helpers
   +neuro/   neuroscience indexes
   +signal/  time-series and signal processing
+  +roi/     regions of interest in images
   +validators/  argument checks for arguments blocks
   +data/    small data-handling helpers (name/value options)
   +tumor/   (see note below)
@@ -101,6 +103,11 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | `correlogram(t1, d1, t2, d2, lags, tol, alpha)` | correlation of two time series at each lag, with significance threshold |
 | `plot_lme(lme, tbl, cond, y, subj)` | plot data, fixed-effect means, and per-subject random effects of a fitted `LinearMixedModel` |
 
+### `dasw.math`
+| Function | Summary |
+|----------|---------|
+| `rescale(vals, int1, int2)` | map values from interval `int1` to `int2`, clipping unless `'noclip'` |
+
 ### `dasw.fit`
 | Function | Summary |
 |----------|---------|
@@ -121,6 +128,14 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | `display_fourier_frequencies(t)` | animate the sinusoid at each discrete Fourier frequency |
 | `slidingwindowfunc(X, Y, start, step, stop, win, func, zeropad)` | apply a function in a sliding window |
 | `filtertransfer(b, a, sr, N, filtfunc)` | measured gain and phase shift of a filter across frequency |
+
+### `dasw.roi`
+| Function | Summary |
+|----------|---------|
+| `spotdetector(BI, conn, name, firstindex, labels)` | find connected spots in a binary image → ROI struct array |
+| `plot_rois(rois, textsize, color)` | draw ROI outlines with their index numbers |
+| `roi_overlap(rois, BI)` | fraction of each ROI's pixels that are on in a binary image |
+| `label_rois(rois, label, ...)` | add labels to ROIs' `labels` fields, without duplicates |
 
 ### `dasw.data`
 | Function | Summary |
