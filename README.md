@@ -45,6 +45,10 @@ checkout always resolves the same `dasw`. See the textbook's
   +plot/    plotting helpers
   +stats/   statistics and data generation
   +math/    linear-algebra helpers
+  +fit/     curve-fitting helpers
+  +neuro/   neuroscience indexes
+  +signal/  time-series and signal processing
+  +roi/     regions of interest in images
   +validators/  argument checks for arguments blocks
   +tumor/   (see note below)
 tests/
@@ -96,6 +100,9 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | `roc_analysis(s1, s2)` | receiver-operating-characteristic curve for two samples |
 | `power_ttest2(n, d, sigma, alpha, R)` | Monte-Carlo power of a 2-sample t-test |
 | `stderr(data)` | standard error of the mean, column-wise |
+| `cumulative_hist_diff(s1, s2)` | largest difference between two samples' empirical CDFs (the KS statistic) |
+| `correlogram(t1, d1, t2, d2, lags, tol, alpha)` | correlation of two time series at each lag, with significance threshold |
+| `kmeans_over_time(data, K)` | animate the first 15 iterations of `kmeans` |
 | `plot_lme(lme, tbl, cond, y, subj)` | plot data, fixed-effect means, and per-subject random effects of a fitted `LinearMixedModel` |
 
 ### `dasw.math`
@@ -104,6 +111,36 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | `rot2d(theta)` | 2-D rotation matrix |
 | `refl2d(theta)` | 2-D reflection matrix |
 | `rot3d(theta, axis)` | 3-D rotation matrix about axis 1, 2, or 3 |
+| `rescale(vals, int1, int2)` | map values from interval `int1` to `int2`, clipping unless `'noclip'` |
+
+### `dasw.fit`
+| Function | Summary |
+|----------|---------|
+| `watchfithappen(x, y, fittype, N)` | animate a fit over its first `N` iterations; return fit, GOF, and SSE per iteration |
+
+### `dasw.neuro`
+| Function | Summary |
+|----------|---------|
+| `orientation_selectivity_index(angles, responses)` | `(R(pref) - R(pref+90))/R(pref)` |
+| `orientation_vector_index(angles, responses)` | 1 minus circular variance in orientation space (Ringach et al. 2002) |
+
+### `dasw.signal`
+| Function | Summary |
+|----------|---------|
+| `threshold_crossings(input, threshold)` | indices where the data cross threshold going up |
+| `fourier_coefficients(t, signal)` | discrete Fourier `an`, `bn`, `fn` by direct projection |
+| `fouriercoeffs(data, si)` | complex Fourier coefficients and frequencies via `fft` |
+| `display_fourier_frequencies(t)` | animate the sinusoid at each discrete Fourier frequency |
+| `slidingwindowfunc(X, Y, start, step, stop, win, func, zeropad)` | apply a function in a sliding window |
+| `filtertransfer(b, a, sr, N, filtfunc)` | measured gain and phase shift of a filter across frequency |
+
+### `dasw.roi`
+| Function | Summary |
+|----------|---------|
+| `spotdetector(BI, conn, name, firstindex, labels)` | find connected spots in a binary image → ROI struct array |
+| `plot_rois(rois, textsize, color)` | draw ROI outlines with their index numbers |
+| `roi_overlap(rois, BI)` | fraction of each ROI's pixels that are on in a binary image |
+| `label_rois(rois, label, ...)` | add labels to ROIs' `labels` fields, without duplicates |
 
 ### `dasw.validators`
 | Function | Summary |

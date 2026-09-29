@@ -17,8 +17,9 @@ jobs:
         with:
           # iqr, icdf, norminv and ttest2 need the Statistics toolbox.
           # fitlme/predict (plot_lme) also need Statistics; fittype/fit
-          # (tumorfit) need the Curve Fitting toolbox.
-          products: Statistics_and_Machine_Learning_Toolbox Curve_Fitting_Toolbox
+          # (tumorfit, watchfithappen) need the Curve Fitting toolbox;
+          # bwboundaries/regionprops (roi.spotdetector) need Image Processing.
+          products: Statistics_and_Machine_Learning_Toolbox Curve_Fitting_Toolbox Image_Processing_Toolbox
 
       - name: Run tests
         uses: matlab-actions/run-tests@v2
