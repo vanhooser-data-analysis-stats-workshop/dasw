@@ -45,19 +45,33 @@ checkout always resolves the same `dasw`. See the textbook's
   +plot/    plotting helpers
   +stats/   statistics and data generation
   +math/    linear-algebra helpers
+  +validators/  argument checks for arguments blocks
   +tumor/   (see note below)
 tests/
-  +dasw/    unit tests, mirroring the namespace under test
+  +dasw/+unittest/   unit tests (test classes), mirroring the namespace
+demos/
+  +dasw/+demo/       graphical demos, mirroring the namespace (not run by CI)
 .github/workflows/tests.yml   runs the tests in CI on every push
 ```
 
-Tests mirror the namespace: the test for `dasw.math.rot2d` lives at
-`tests/+dasw/+math/rot2dTest.m`. Run them locally with:
+Tests mirror the namespace, one folder per function under a `+unittest`
+layer, and are MATLAB test classes (`matlab.unittest.TestCase`): the test for
+`dasw.math.rot2d` lives at `tests/+dasw/+unittest/+math/+rot2d/Rot2dTest.m`.
+Run them locally with:
 
 ```matlab
 addpath(pwd);   % repo root, so dasw.* resolves
 runtests("tests", IncludeSubfolders=true)
 ```
+
+Demos are the other half: a test runs unobserved and passes or fails, while a
+demo draws a figure so a person can *see* that a function does what its help
+says. They mirror the namespace the same way under a `+demo` layer, and each
+one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
+`tests/`, so CI never opens their figures. Run one with
+`addpath(fullfile(pwd, "demos"))` and then call it by name, e.g.
+`dasw.demo.<pkg>.<function>.<demoName>()`. Argument validators
+(`dasw.validators`) need tests but not demos.
 
 ## Function catalog
 
@@ -90,6 +104,11 @@ runtests("tests", IncludeSubfolders=true)
 | `rot2d(theta)` | 2-D rotation matrix |
 | `refl2d(theta)` | 2-D reflection matrix |
 | `rot3d(theta, axis)` | 3-D rotation matrix about axis 1, 2, or 3 |
+
+### `dasw.validators`
+| Function | Summary |
+|----------|---------|
+| `mustBeEqualSize(A, B)` | error unless `size(A)` equals `size(B)`; for use in an `arguments` block, e.g. `y (:,1) double {dasw.validators.mustBeEqualSize(x, y)}` (MATLAB has no built-in validator that compares two inputs) |
 
 ### `dasw.tumor`
 > **Note:** these functions are specific to the tumor-study lab, so by the
