@@ -30,8 +30,8 @@ exactly the functions that exist at that stage of the course:
 |-----|----------|
 | `unit1` | Foundations (descriptive stats, plotting, inference helpers) |
 | `unit2` | + fits and indexes |
-| `unit3` | + time series (`dasw.signal`, `correlogram`) *(tag not yet cut)* |
-| `unit4` | + image processing (`dasw.roi`, `rescale`) *(tag not yet cut)* |
+| `unit3` | + time series (`dasw.signal`, `correlogram`) |
+| `unit4` | + image processing (`dasw.roi`, `rescale`) |
 | `unit5` | + high-dimensional data |
 
 Pin a project to a tag (e.g. as a submodule or a setup-script clone) so a clean
