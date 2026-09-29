@@ -25,7 +25,7 @@ switch (lower(modestr)),
          disp(['Placebo group mean: ' num2str(mean(sort(data2))',2) ', N=' int2str(numel(data2)) '.']);
     case 'median',
          disp(' ');         disp(' ');
-         disp(['   Drug group median: ' num2str(median(sort(data1))',2) ', N=' int2str(numel(data2)) '.']);
+         disp(['   Drug group median: ' num2str(median(sort(data1))',2) ', N=' int2str(numel(data1)) '.']);
          disp(['Placebo group median: ' num2str(median(sort(data2))',2) ', N=' int2str(numel(data2)) '.']);
     case 'percentilerange',
          disp(' ');         disp(' ');
