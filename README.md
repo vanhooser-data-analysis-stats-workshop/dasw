@@ -86,7 +86,9 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | `cumhist(data)` | `[X,Y]` for a cumulative histogram (percent ≤ X) |
 | `histbins(data, edges)` | `[N, centers]` histogram counts for custom bin edges |
 | `autohistogram(data)` | `[counts, centers]` with Freedman–Diaconis bin widths |
+| `scatterplot(X, ...)` | scatter plot; pairwise subplots for >2 columns |
 | `supersubplot(fig, m, n, p)` | subplot axes arranged across multiple figures |
+| `linear_transform_explorer(LT, ...)` | animate a 2-D linear transformation |
 | `displaydrugvsplacebo(mode, d1, d2)` | display helper for the `drugvsplacebo` demo |
 
 ### `dasw.stats`
@@ -101,11 +103,15 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | `stderr(data)` | standard error of the mean, column-wise |
 | `cumulative_hist_diff(s1, s2)` | largest difference between two samples' empirical CDFs (the KS statistic) |
 | `correlogram(t1, d1, t2, d2, lags, tol, alpha)` | correlation of two time series at each lag, with significance threshold |
+| `kmeans_over_time(data, K)` | animate the first 15 iterations of `kmeans` |
 | `plot_lme(lme, tbl, cond, y, subj)` | plot data, fixed-effect means, and per-subject random effects of a fitted `LinearMixedModel` |
 
 ### `dasw.math`
 | Function | Summary |
 |----------|---------|
+| `rot2d(theta)` | 2-D rotation matrix |
+| `refl2d(theta)` | 2-D reflection matrix |
+| `rot3d(theta, axis)` | 3-D rotation matrix about axis 1, 2, or 3 |
 | `rescale(vals, int1, int2)` | map values from interval `int1` to `int2`, clipping unless `'noclip'` |
 
 ### `dasw.fit`
