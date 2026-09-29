@@ -50,6 +50,7 @@ checkout always resolves the same `dasw`. See the textbook's
   +signal/  time-series and signal processing
   +roi/     regions of interest in images
   +validators/  argument checks for arguments blocks
+  +data/    small data-handling helpers (name/value options)
   +tumor/   (see note below)
 tests/
   +dasw/+unittest/   unit tests (test classes), mirroring the namespace
@@ -141,6 +142,12 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | `plot_rois(rois, textsize, color)` | draw ROI outlines with their index numbers |
 | `roi_overlap(rois, BI)` | fraction of each ROI's pixels that are on in a binary image |
 | `label_rois(rois, label, ...)` | add labels to ROIs' `labels` fields, without duplicates |
+
+### `dasw.data`
+| Function | Summary |
+|----------|---------|
+| `assign(name1, val1, ...)` | assign name/value pairs as variables in the caller's workspace (option parsing) |
+| `struct2namevaluepair(s)` | convert a struct to a `{'name', value, ...}` cell array |
 
 ### `dasw.validators`
 | Function | Summary |
