@@ -44,8 +44,11 @@ checkout always resolves the same `dasw`. See the textbook's
 +dasw/
   +plot/    plotting helpers
   +stats/   statistics and data generation
+  +fit/     curve-fitting helpers
+  +neuro/   neuroscience indexes
   +validators/  argument checks for arguments blocks
   +data/    small data-handling helpers (name/value options)
+  +tumor/   (see note below)
 tests/
   +dasw/+unittest/   unit tests (test classes), mirroring the namespace
 demos/
@@ -80,6 +83,7 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | `cumhist(data)` | `[X,Y]` for a cumulative histogram (percent ≤ X) |
 | `histbins(data, edges)` | `[N, centers]` histogram counts for custom bin edges |
 | `autohistogram(data)` | `[counts, centers]` with Freedman–Diaconis bin widths |
+| `supersubplot(fig, m, n, p)` | subplot axes arranged across multiple figures |
 | `displaydrugvsplacebo(mode, d1, d2)` | display helper for the `drugvsplacebo` demo |
 
 ### `dasw.stats`
@@ -92,6 +96,18 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | `roc_analysis(s1, s2)` | receiver-operating-characteristic curve for two samples |
 | `power_ttest2(n, d, sigma, alpha, R)` | Monte-Carlo power of a 2-sample t-test |
 | `cumulative_hist_diff(s1, s2)` | largest difference between two samples' empirical CDFs (the KS statistic) |
+| `plot_lme(lme, tbl, cond, y, subj)` | plot data, fixed-effect means, and per-subject random effects of a fitted `LinearMixedModel` |
+
+### `dasw.fit`
+| Function | Summary |
+|----------|---------|
+| `watchfithappen(x, y, fittype, N)` | animate a fit over its first `N` iterations; return fit, GOF, and SSE per iteration |
+
+### `dasw.neuro`
+| Function | Summary |
+|----------|---------|
+| `orientation_selectivity_index(angles, responses)` | `(R(pref) - R(pref+90))/R(pref)` |
+| `orientation_vector_index(angles, responses)` | 1 minus circular variance in orientation space (Ringach et al. 2002) |
 
 ### `dasw.data`
 | Function | Summary |
@@ -103,6 +119,19 @@ one's help ends with a **WHAT YOU SHOULD SEE** section. They live outside
 | Function | Summary |
 |----------|---------|
 | `mustBeEqualSize(A, B)` | error unless `size(A)` equals `size(B)`; for use in an `arguments` block, e.g. `y (:,1) double {dasw.validators.mustBeEqualSize(x, y)}` (MATLAB has no built-in validator that compares two inputs) |
+
+### `dasw.tumor`
+> **Note:** these functions are specific to the tumor-study lab, so by the
+> reusable-layer principle ("`dasw` knows nothing about the study") they do not
+> really belong in the shared library — they are candidates to move into a
+> project namespace. Harvested here as-is for now; see the tracking issue.
+
+| Function | Summary |
+|----------|---------|
+| `tumorfit(tumordata, reps)` | fit `Y = a + b*exp(c*x^d)`; return change and rate |
+| `tumorplot(data, a, b, c, d)` | plot tumor data with its fit |
+| `analyze_tumors(folder, condition)` | fit every `tumor_data.txt` under a folder → table |
+| `analyze_tumors_plot(folder, condition, plotit)` | as above, plotting each fit |
 
 ## Notes
 
