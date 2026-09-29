@@ -32,13 +32,13 @@ classdef SpotdetectorTest < matlab.unittest.TestCase
         end
 
         function testSinglePixelContourIsFlared(testCase)
-            % A one-pixel spot's contour is flared out around the pixel so
-            % that it is visible when plotted.
+            % A one-pixel spot's contour is flared out to a closed square
+            % around the pixel so that it is visible when plotted.
             BI = false(5);
             BI(3, 4) = true;
             rois = dasw.roi.spotdetector(BI, 4, 'img', 1, {});
-            testCase.verifyEqual(rois.xi, 4 + [-0.5 -0.5 0.5 0.5]');
-            testCase.verifyEqual(rois.yi, 3 + [-0.5 -0.5 0.5 0.5]');
+            testCase.verifyEqual(rois.xi, 4 + [-0.5 -0.5 0.5 0.5 -0.5]');
+            testCase.verifyEqual(rois.yi, 3 + [-0.5 0.5 0.5 -0.5 -0.5]');
         end
 
         function testConnectivity(testCase)
