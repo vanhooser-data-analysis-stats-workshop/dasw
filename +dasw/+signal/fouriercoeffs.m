@@ -16,4 +16,4 @@ function [fc, freqs] = fouriercoeffs(data,si)
 fc = fft(data);
 fc(1) = fc(1)/(numel(data));
 fc(2:end) = (2/(numel(data)))*(real(fc(2:end))-sqrt(-1)*imag(fc(2:end)));
-freqs = (0:numel(data)-1)/(si*(numel(data)-1));
+freqs = (0:numel(data)-1)/(si*numel(data));

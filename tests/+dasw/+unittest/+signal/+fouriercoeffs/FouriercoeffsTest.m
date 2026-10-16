@@ -28,5 +28,12 @@ classdef FouriercoeffsTest < matlab.unittest.TestCase
             fc = dasw.signal.fouriercoeffs(sin(2*pi*5*t), 0.01);
             testCase.verifyEqual(fc(6), 1i, 'AbsTol', 1e-9);
         end
+
+        function testFrequencies(testCase)
+            % Bin n+1 is n cycles over the record: n/(N*SI) Hz.
+            [~, freqs] = dasw.signal.fouriercoeffs(zeros(1,100), 0.01);
+            testCase.verifyEqual(freqs(6), 5, 'AbsTol', 1e-12);
+            testCase.verifyEqual(freqs(end), 99, 'AbsTol', 1e-12);
+        end
     end
 end
